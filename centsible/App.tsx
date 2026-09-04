@@ -1,4 +1,3 @@
-import "../centsible/";
 import React, { useEffect } from "react";
 import { View, Text, SafeAreaView, StatusBar } from "react-native";
 import { useBudgetStore } from "./src/store/useBudgetStore";
