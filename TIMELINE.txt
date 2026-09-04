@@ -1,1 +1,5 @@
-TEST
+1. FIRST INSTALL THIS PROJECT FOLDER FOR THIS PROJECT 
+    ->npx create-expo-app . -t expo-template-blank-typescript
+
+2. INSTALL THIS 
+    ->npx expo install @supabase/supabase-js @react-native-async-storage/async-storage react-native-url-polyfill zustand lucide-react-native
