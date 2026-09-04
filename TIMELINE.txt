@@ -3,3 +3,27 @@
 
 2. INSTALL THIS 
     ->npx expo install @supabase/supabase-js @react-native-async-storage/async-storage react-native-url-polyfill zustand lucide-react-native
+
+
+    Centsible/
+├── App.tsx                     # Main application entry
+├── babel.config.js             # Babel configuration
+├── tailwind.config.js          # Tailwind styling rules
+├── metro.config.js             # Metro bundler config
+├── global.css                  # Global Tailwind imports
+└── src/
+    ├── types/
+    │   └── index.ts            # TypeScript definitions
+    ├── lib/
+    │   └── supabase.ts         # Database connection
+    ├── store/
+    │   └── useBudgetStore.ts   # State management (Zustand)
+    └── components/
+        ├── BalanceCard.tsx     # Shows totals
+        ├── TransactionForm.tsx # Input form
+        └── TransactionList.tsx # Scrollable list
+
+
+3. ADD ALL THE PREREQUISITE 
+    ->npx expo install nativewind react-native-reanimated react-native-safe-area-context
+npm install -D tailwindcss@^3.3.0
