@@ -27,3 +27,6 @@
 3. ADD ALL THE PREREQUISITE 
     ->npx expo install nativewind react-native-reanimated react-native-safe-area-context
 npm install -D tailwindcss@^3.3.0
+
+4. ADD THIS 
+    ->npm install nativewind@^4.1.23 tailwindcss@^3.4.3
