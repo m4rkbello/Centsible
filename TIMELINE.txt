@@ -30,3 +30,7 @@ npm install -D tailwindcss@^3.3.0
 
 4. ADD THIS 
     ->npm install nativewind@^4.1.23 tailwindcss@^3.4.3
+
+5. ADD THIS ALSO 
+    ->cd C:\mobile\Centsible\centsible
+npx expo install zustand @supabase/supabase-js @react-native-async-storage/async-storage react-native-url-polyfill
