@@ -1,28 +1,34 @@
-import React, { useEffect } from "react";
-import { View, Text, SafeAreaView, StatusBar } from "react-native";
-import { useBudgetStore } from "./src/store/useBudgetStore";
-import BalanceCard from "./src/components/BalanceCard";
-import TransactionForm from "./src/components/TransactionForm";
-import TransactionList from "./src/components/TransactionList";
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, View } from 'react-native';
+import { useAuthStore } from './src/store/useAuthStore';
+import LoginScreen from './src/screens/LoginScreen';
+import RegisterScreen from './src/screens/RegisterScreen';
+import DashboardScreen from './src/screens/DashboardScreen';
 
 export default function App() {
-  const { fetchTransactions, subscribeToRealtime } = useBudgetStore();
+  const { session, isLoading, initialize } = useAuthStore();
+  const [screen, setScreen] = useState<'login' | 'register'>('login');
 
   useEffect(() => {
-    fetchTransactions();
-    const unsubscribe = subscribeToRealtime();
+    const unsubscribe = initialize();
     return () => unsubscribe();
   }, []);
 
-  return (
-    <SafeAreaView className="flex-1 bg-slate-900">
-      <StatusBar barStyle="light-content" />
-      <View className="flex-1 px-4 pt-6">
-        <Text className="text-2xl font-bold text-white mb-4">Centsible</Text>
-        <BalanceCard />
-        <TransactionForm />
-        <TransactionList />
+  if (isLoading) {
+    return (
+      <View className="flex-1 justify-center items-center bg-slate-900">
+        <ActivityIndicator size="large" color="#6366f1" />
       </View>
-    </SafeAreaView>
-  );
+    );
+  }
+
+  if (!session) {
+    return screen === 'login' ? (
+      <LoginScreen onSwitchToRegister={() => setScreen('register')} />
+    ) : (
+      <RegisterScreen onSwitchToLogin={() => setScreen('login')} />
+    );
+  }
+
+  return <DashboardScreen />;
 }
