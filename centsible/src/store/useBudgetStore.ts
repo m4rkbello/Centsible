@@ -1,20 +1,24 @@
 import { create } from 'zustand';
-import { supabase } from '../lib/supabase';
 import { RealtimeChannel } from '@supabase/supabase-js';
+import { supabase } from '../lib/supabase';
 import { Transaction } from '../types';
 
 interface BudgetState {
   transactions: Transaction[];
   isLoading: boolean;
+  channel: RealtimeChannel | null;
   fetchTransactions: () => Promise<void>;
   addTransaction: (title: string, amount: number, type: 'income' | 'expense') => Promise<void>;
   deleteTransaction: (id: string) => Promise<void>;
-  subscribeToRealtime: () => () => void;
+  subscribeToRealtime: () => void;
+  unsubscribeFromRealtime: () => void;
+  reset: () => void;
 }
 
 export const useBudgetStore = create<BudgetState>((set, get) => ({
   transactions: [],
   isLoading: false,
+  channel: null,
 
   fetchTransactions: async () => {
     set({ isLoading: true });
@@ -28,7 +32,11 @@ export const useBudgetStore = create<BudgetState>((set, get) => ({
   },
 
   addTransaction: async (title, amount, type) => {
-    await supabase.from('transactions').insert([{ title, amount, type }]);
+    const { data: userData } = await supabase.auth.getUser();
+    if (!userData.user) return;
+    await supabase
+      .from('transactions')
+      .insert([{ title, amount, type, user_id: userData.user.id }]);
   },
 
   deleteTransaction: async (id) => {
@@ -36,7 +44,9 @@ export const useBudgetStore = create<BudgetState>((set, get) => ({
   },
 
   subscribeToRealtime: () => {
-    const channel: RealtimeChannel = supabase
+    if (get().channel) return; // already subscribed
+
+    const channel = supabase
       .channel('public:transactions')
       .on(
         'postgres_changes',
@@ -52,8 +62,19 @@ export const useBudgetStore = create<BudgetState>((set, get) => ({
       )
       .subscribe();
 
-    return () => {
+    set({ channel });
+  },
+
+  unsubscribeFromRealtime: () => {
+    const channel = get().channel;
+    if (channel) {
       supabase.removeChannel(channel);
-    };
+      set({ channel: null });
+    }
+  },
+
+  reset: () => {
+    get().unsubscribeFromRealtime();
+    set({ transactions: [], isLoading: false });
   },
 }));
