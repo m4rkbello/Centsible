@@ -1,11 +1,5 @@
-/**
- * App Theme Configuration
- * Defines colors, typography, and spacing constants across environments.
- */
 import "@/global.css";
 import { Platform } from "react-native";
-
-// --- COLORS ---
 
 export const Colors = {
   light: {
