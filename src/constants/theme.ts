@@ -20,14 +20,12 @@ export const Colors = {
 
 export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
 
-// --- TYPOGRAPHY ---
-
 export const Fonts = Platform.select({
   ios: {
-    sans: "system-ui", // UIFontDescriptorSystemDesignDefault
-    serif: "ui-serif", // UIFontDescriptorSystemDesignSerif
-    rounded: "ui-rounded", // UIFontDescriptorSystemDesignRounded
-    mono: "ui-monospace", // UIFontDescriptorSystemDesignMonospaced
+    sans: "system-ui",
+    serif: "ui-serif",
+    rounded: "ui-rounded",
+    mono: "ui-monospace",
   },
   web: {
     sans: "var(--font-display)",
@@ -42,8 +40,6 @@ export const Fonts = Platform.select({
     mono: "monospace",
   },
 });
-
-// --- LAYOUT & SPACING ---
 
 export const Spacing = {
   half: 2,
