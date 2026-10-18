@@ -14,7 +14,7 @@ import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
 
 const DevMenuHint = () => {
   if (Platform.OS === "web") {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
+    return <ThemedText type="small">added</ThemedText>;
   }
 
   if (Device.isDevice) {
@@ -47,7 +47,7 @@ const HINTS = [
   {
     id: "fresh-start",
     title: "Fresh start",
-    hint: <ThemedText type="code">npm run reset-project</ThemedText>,
+    hint: <ThemedText type="code">test</ThemedText>,
   },
 ];
 
