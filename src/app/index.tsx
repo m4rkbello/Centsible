@@ -10,7 +10,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const DevMenuHint = () => {
   if (Platform.OS === "web") {
-    return <ThemedText type="small">added</ThemedText>;
+    return <ThemedText type="small">TEST</ThemedText>;
   }
 
   if (Device.isDevice) {
