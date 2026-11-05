@@ -33,7 +33,7 @@ const HINTS = [
   {
     id: "editing",
     title: "Try editing",
-    hint: <ThemedText type="code">src/app/index.tsx</ThemedText>,
+    hint: <ThemedText type="code">PUCHA!</ThemedText>,
   },
   {
     id: "dev-tools",
