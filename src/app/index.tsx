@@ -43,7 +43,7 @@ const HINTS = [
   {
     id: "fresh-start",
     title: "Fresh start",
-    hint: <ThemedText type="code">UNSA DAW?!</ThemedText>,
+    hint: <ThemedText type="code">hays</ThemedText>,
   },
 ];
 
